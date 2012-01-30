@@ -28,6 +28,7 @@ function gameOver()
 	cityBlock[1] = love.graphics.newImage("art/block1.png")
 	cityBlock[2] = love.graphics.newImage("art/block2.png")
 	cityBlock[3] = love.graphics.newImage("art/block3.png")
+	topBar = love.graphics.newImage("art/topbar.png")
 	scroll_speed = 500
 	blockSize = 32
 	
@@ -66,6 +67,8 @@ function love.draw()
 	
 	love.graphics.setColor(255,0, 0, 255 )
 	love.graphics.print("x/y " .. love.mouse.getX() .. "/" .. love.mouse.getY() .. "\nRelative x/y " .. math.floor(relative_x) .. "/" .. math.floor(relative_y) .. "\nx/y" .. view.infox .. "/" .. view.infoy .. "\ntick: " .. lastTick, 10, 10)
+	love.graphics.setColor(255, 255, 255, 255 )
+	love.graphics.draw(topBar, love.graphics.getWidth() - topBar:getWidth(), 0)
 
 end
 
