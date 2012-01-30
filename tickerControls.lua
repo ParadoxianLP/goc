@@ -1,0 +1,3 @@
+function tickerPause()
+
+end
