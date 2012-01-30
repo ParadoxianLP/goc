@@ -24,3 +24,13 @@ function makeMap()
 		end
 	end
 end
+
+function drawMap()
+	local y=0
+	local x=0
+	for y=1, #map do
+        for x=1, #map[y] do
+                love.graphics.draw(cityBlock[map[y][x]], (-32 + x * 32) - relative_x, (-32 + y * 32) - relative_y)
+        end
+	end
+end

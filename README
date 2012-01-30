@@ -1,0 +1,8 @@
+Controls
+
+SPACE = pause/unpause (game starts paused)
+Numpad +/- = increase speed/decrease speed
+ESC = QUIT
+
+R = recreate city (debug only)
+
