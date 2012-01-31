@@ -2,6 +2,7 @@ beholder = require 'beholder'
 mapFunctions = require 'mapFunctions'
 mouseControls = require 'mousecontrols'
 tickerControls = require 'tickerControls'
+states = require 'states'
 
 function love.mousepressed(x, y, button)
 	mousePressed(x, y, button)
@@ -20,6 +21,11 @@ function gameOver()
  end
 
  function love.load()
+	rectStartGame = { 
+		x = 0,
+		y = 0
+		}
+	gameState = 'mainmenu'
 	lastTick = 1
 	tickDt = 0
 	tickSpeed = 0.5
@@ -47,7 +53,7 @@ function gameOver()
 	map = { }
 	view = { }
 	view.info = "closed"
-	view.strat = "open"
+	view.strat = "closed"
 	view.infox = "lol"
 	view.infoy = "lol"
 	
@@ -60,32 +66,20 @@ function gameOver()
 end
 
 function love.draw()
-	--draw mouse location for debugging purposes
-	love.graphics.setColor(255, 255, 255, 255 )
-	
-	drawMap()
-	
-	love.graphics.setColor(255,0, 0, 255 )
-	love.graphics.print("x/y " .. love.mouse.getX() .. "/" .. love.mouse.getY() .. "\nRelative x/y " .. math.floor(relative_x) .. "/" .. math.floor(relative_y) .. "\nx/y" .. view.infox .. "/" .. view.infoy .. "\ntick: " .. lastTick, 10, 10)
-	love.graphics.setColor(255, 255, 255, 255 )
-	love.graphics.draw(topBar, love.graphics.getWidth() - topBar:getWidth(), 0)
-
+	if gameState == 'ingame' then
+		drawInGame()
+	end
+	if gameState == 'mainmenu' then
+		drawMainMenu()
+	end
 end
 
 function love.update(dt)
-
--- map movement
- if love.keyboard.isDown("right") then
-      mapMoveRight(dt)
-   elseif love.keyboard.isDown("left") then
-      mapMoveLeft(dt)
-   end
-   if love.keyboard.isDown("down") then
-      mapMoveDown(dt)
-   elseif love.keyboard.isDown("up") then
-      mapMoveUp(dt)
-   end
-   
-   tickDo(dt)
+	if gameState == 'ingame' then
+		updateInGame(dt)
+	end
+	if gameState == 'mainmenu' then
+		updateMainMenu(dt)
+	end
 end
 
